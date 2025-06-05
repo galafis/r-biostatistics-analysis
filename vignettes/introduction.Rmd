@@ -1,0 +1,161 @@
+---
+title: "Introduction to R Biostatistics Analysis"
+author: "Gabriel Demetrios Lafis"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to R Biostatistics Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(rbiostatistics)
+```
+
+## Introduction
+
+The `rbiostatistics` package provides a comprehensive set of tools for biostatistical analysis, with a focus on survival analysis and clinical trials. This vignette introduces the main functionality of the package and demonstrates how to use it with example data.
+
+## Survival Analysis
+
+Survival analysis is a branch of statistics that deals with the analysis of time-to-event data. The `rbiostatistics` package provides several functions for survival analysis:
+
+### Creating a Survival Object
+
+The first step in survival analysis is to create a survival object:
+
+```{r}
+# Load sample data
+data(lung_cancer_survival)
+
+# Create a survival object
+surv_obj <- create_survival_object(lung_cancer_survival, 
+                                  time_col = "time", 
+                                  status_col = "status")
+head(surv_obj)
+```
+
+### Kaplan-Meier Survival Curves
+
+The Kaplan-Meier method is a non-parametric statistic used to estimate the survival function from lifetime data:
+
+```{r}
+# Fit Kaplan-Meier curves by sex
+km_fit <- fit_kaplan_meier(lung_cancer_survival, 
+                          time_col = "time", 
+                          status_col = "status", 
+                          group_col = "sex")
+
+# Plot the Kaplan-Meier curves
+plot(km_fit, 
+     xlab = "Time (months)", 
+     ylab = "Survival Probability",
+     main = "Kaplan-Meier Survival Curves by Sex",
+     col = c("blue", "red"))
+legend("topright", 
+       legend = c("Male", "Female"), 
+       col = c("blue", "red"), 
+       lty = 1)
+```
+
+### Log-Rank Test
+
+The log-rank test is used to compare the survival distributions of two or more groups:
+
+```{r}
+# Perform log-rank test
+log_rank_result <- log_rank_test(lung_cancer_survival, 
+                                time_col = "time", 
+                                status_col = "status", 
+                                group_col = "sex")
+print(log_rank_result)
+```
+
+### Cox Proportional Hazards Model
+
+The Cox proportional hazards model is a regression model commonly used in survival analysis:
+
+```{r}
+# Fit Cox model
+cox_model <- fit_cox_model(lung_cancer_survival, 
+                          time_col = "time", 
+                          status_col = "status", 
+                          covariates = c("age", "sex", "ph.ecog", "stage"))
+
+# Print model summary
+summary(cox_model)
+
+# Calculate hazard ratios
+hr <- calculate_hazard_ratio(cox_model)
+print(hr)
+```
+
+## Clinical Trials Analysis
+
+Clinical trials are research studies performed to evaluate the safety and efficacy of medical interventions. The `rbiostatistics` package provides several functions for clinical trials analysis:
+
+### Sample Size Calculation
+
+Before conducting a clinical trial, it's important to determine the appropriate sample size:
+
+```{r}
+# Calculate sample size for a two-group comparison
+n <- calculate_sample_size(effect_size = 0.5, power = 0.8, alpha = 0.05)
+print(paste("Required sample size per group:", ceiling(n)))
+```
+
+### Randomization
+
+Randomization is a crucial step in clinical trials to minimize bias:
+
+```{r}
+# Create a sample of 20 subjects
+subjects <- data.frame(id = 1:20)
+
+# Randomize subjects to treatment and placebo groups
+randomized <- randomize_subjects(subjects, 
+                                groups = c("Treatment", "Placebo"), 
+                                ratio = c(1, 1))
+table(randomized$group)
+```
+
+### Treatment Effect Analysis
+
+After collecting data, we can analyze the treatment effect:
+
+```{r}
+# Load sample data
+data(clinical_trial_data)
+
+# Analyze treatment effect
+result <- analyze_treatment_effect(clinical_trial_data, 
+                                  outcome = "week12", 
+                                  treatment = "treatment", 
+                                  covariates = c("baseline", "age", "sex"))
+print(result)
+```
+
+### Subgroup Analysis
+
+Subgroup analysis can help identify whether the treatment effect varies across different patient populations:
+
+```{r}
+# Analyze treatment effect in subgroups
+subgroup_results <- analyze_subgroups(clinical_trial_data, 
+                                     outcome = "week12", 
+                                     treatment = "treatment", 
+                                     subgroups = c("sex", "site"))
+print(subgroup_results)
+```
+
+## Conclusion
+
+The `rbiostatistics` package provides a comprehensive set of tools for biostatistical analysis, with a focus on survival analysis and clinical trials. This vignette has introduced the main functionality of the package and demonstrated how to use it with example data.
+
+For more information, please refer to the function documentation and other vignettes.
+
