@@ -1,0 +1,11 @@
+subject_id,treatment,baseline_score,endpoint_score,visit_week
+1,Placebo,45,50,12
+2,Active,55,70,12
+3,Placebo,60,58,12
+4,Active,50,72,12
+5,Placebo,40,48,12
+6,Active,52,69,12
+7,Placebo,47,51,12
+8,Active,58,75,12
+9,Placebo,53,56,12
+10,Active,49,68,12
