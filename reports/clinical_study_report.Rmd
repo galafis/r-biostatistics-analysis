@@ -1,0 +1,357 @@
+---
+title: "Relatório de Estudo Clínico (Clinical Study Report)"
+author: "Biostatistician"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    keep_tex: false
+    latex_engine: pdflatex
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+params:
+  study_title: "Phase III Randomized Clinical Trial"
+  study_number: "RCT-2025-001"
+  sponsor: "Clinical Research Organization"
+  principal_investigator: "Dr. Clinical Researcher"
+  study_period: "2024-2025"
+  data_cutoff: !r Sys.Date()
+  primary_endpoint: "primary_outcome"
+  treatment_var: "treatment_group"
+---
+
+```{r setup, include=FALSE}
+# Configuração global do documento
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 8,
+  fig.height = 6,
+  dpi = 300,
+  fig.align = "center"
+)
+
+# Carregar bibliotecas necessárias
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(tableone)
+library(survival)
+library(survminer)
+library(forestplot)
+library(gridExtra)
+library(lubridate)
+library(tidyr)
+
+# Configurar tema ggplot
+theme_set(theme_minimal(base_size = 12))
+
+# Função para formatação de tabelas
+format_table <- function(df, caption = "", digits = 3) {
+  df %>%
+    kable(
+      caption = caption,
+      digits = digits,
+      format = "latex",
+      booktabs = TRUE,
+      escape = FALSE
+    ) %>%
+    kable_styling(
+      latex_options = c("striped", "hold_position", "scale_down"),
+      font_size = 10
+    )
+}
+
+# Função para criar gráficos padronizados
+create_plot <- function(data, mapping, type = "point") {
+  p <- ggplot(data, mapping)
+  
+  if (type == "point") {
+    p <- p + geom_point()
+  } else if (type == "boxplot") {
+    p <- p + geom_boxplot()
+  } else if (type == "bar") {
+    p <- p + geom_bar(stat = "identity")
+  }
+  
+  p + theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.title = element_text(size = 12),
+      legend.position = "bottom"
+    )
+}
+```
+
+# Sumário Executivo {#executive-summary}
+
+## Objetivo do Estudo
+
+Este relatório apresenta os resultados do estudo **`r params$study_title`** (Protocolo: `r params$study_number`), conduzido sob a responsabilidade de `r params$principal_investigator` durante o período de `r params$study_period`.
+
+## Desenho do Estudo
+
+- **Tipo**: Ensaio clínico randomizado, duplo-cego, controlado por placebo
+- **População**: Pacientes adultos com condição clínica específica
+- **Desfecho Primário**: `r params$primary_endpoint`
+- **Data de Corte**: `r params$data_cutoff`
+
+## Resultados Principais
+
+```{r executive-results, results='asis'}
+# Esta seção será preenchida com os resultados principais
+# quando os dados estiverem disponíveis
+cat("**Resultados principais serão apresentados após análise dos dados.**\n\n")
+cat("- Diferença entre grupos: [A ser calculado]\n")
+cat("- Intervalo de confiança 95%: [A ser calculado]\n")
+cat("- Valor p: [A ser calculado]\n")
+cat("- Conclusão: [A ser determinado]\n")
+```
+
+## Conclusões
+
+[Conclusões serão inseridas após análise completa dos dados]
+
+# Introdução e Objetivos {#introduction}
+
+## Contexto Clínico
+
+[Descrição da condição médica, necessidade médica não atendida e contexto para o estudo]
+
+## Objetivos do Estudo
+
+### Objetivo Primário
+- Avaliar a eficácia de [tratamento experimental] comparado ao [controle] em [população específica]
+
+### Objetivos Secundários
+- Avaliar a segurança e tolerabilidade
+- Avaliar desfechos de qualidade de vida
+- Conduzir análises exploratórias de biomarcadores
+
+## Hipóteses
+
+- **H₀**: Não há diferença significativa entre os grupos de tratamento
+- **H₁**: Existe diferença significativa entre os grupos de tratamento
+
+# Métodos {#methods}
+
+## Desenho do Estudo
+
+- **Desenho**: Ensaio clínico randomizado, fase III
+- **Cegamento**: Duplo-cego
+- **Randomização**: 1:1, estratificada por centro e fatores prognósticos
+- **Duração**: [Duração do seguimento]
+
+## População do Estudo
+
+### Critérios de Inclusão
+- [Listar critérios de inclusão]
+
+### Critérios de Exclusão
+- [Listar critérios de exclusão]
+
+## Desfechos
+
+### Desfecho Primário
+- **Definição**: [Definição clara do desfecho primário]
+- **Método de Avaliação**: [Como será medido]
+- **Tempo de Avaliação**: [Quando será avaliado]
+
+### Desfechos Secundários
+- [Listar e definir desfechos secundários]
+
+## Análise Estatística
+
+### População de Análise
+- **ITT (Intention-to-Treat)**: Todos os pacientes randomizados
+- **PP (Per-Protocol)**: Pacientes que completaram o protocolo
+- **Segurança**: Todos os pacientes que receberam pelo menos uma dose
+
+### Métodos Estatísticos
+
+```{r methods-stats, results='asis'}
+cat("**Análise do Desfecho Primário:**\n")
+cat("- Teste estatístico: [t-test, Mann-Whitney, etc.]\n")
+cat("- Nível de significância: α = 0.05\n")
+cat("- Poder estatístico: 80%\n")
+cat("- Tamanho da amostra: [n calculado]\n\n")
+
+cat("**Análises Secundárias:**\n")
+cat("- Análises de subgrupos\n")
+cat("- Análises de sensibilidade\n")
+cat("- Análises de segurança\n")
+```
+
+# Resultados {#results}
+
+## Disposição dos Pacientes
+
+```{r patient-disposition, eval=FALSE}
+# Fluxograma CONSORT será criado quando os dados estiverem disponíveis
+# library(consort)
+# 
+# disposition_data <- data.frame(
+#   stage = c("Screened", "Randomized", "Treated", "Completed"),
+#   n = c(500, 400, 395, 380)
+# )
+# 
+# consort_plot(disposition_data)
+```
+
+**Figura 1:** Fluxograma de disposição dos pacientes (CONSORT)
+
+[Fluxograma será inserido quando os dados estiverem disponíveis]
+
+## Características Basais
+
+```{r baseline-characteristics, eval=FALSE}
+# Tabela de características basais será criada quando os dados estiverem disponíveis
+# 
+# baseline_vars <- c("age", "sex", "weight", "height", "baseline_score")
+# 
+# table1 <- CreateTableOne(
+#   vars = baseline_vars,
+#   strata = params$treatment_var,
+#   data = study_data,
+#   test = TRUE
+# )
+# 
+# print(table1, showAllLevels = TRUE)
+```
+
+**Tabela 1:** Características demográficas e basais
+
+[Tabela será inserida quando os dados estiverem disponíveis]
+
+## Análise de Eficácia
+
+### Desfecho Primário
+
+```{r primary-efficacy, eval=FALSE}
+# Análise do desfecho primário será realizada quando os dados estiverem disponíveis
+# 
+# primary_model <- lm(primary_outcome ~ treatment_group + stratification_factors, 
+#                    data = study_data)
+# 
+# summary(primary_model)
+# confint(primary_model)
+```
+
+**Tabela 2:** Análise do desfecho primário
+
+[Resultados serão inseridos quando os dados estiverem disponíveis]
+
+### Análises de Subgrupos
+
+```{r subgroup-analysis, eval=FALSE}
+# Forest plot de análises de subgrupos
+# 
+# subgroup_results <- data.frame(
+#   subgroup = c("Overall", "Age <65", "Age ≥65", "Male", "Female"),
+#   estimate = c(0.8, 0.7, 0.9, 0.8, 0.8),
+#   lower = c(0.6, 0.5, 0.6, 0.6, 0.6),
+#   upper = c(1.0, 0.9, 1.2, 1.0, 1.0)
+# )
+# 
+# forestplot(
+#   labeltext = subgroup_results$subgroup,
+#   mean = subgroup_results$estimate,
+#   lower = subgroup_results$lower,
+#   upper = subgroup_results$upper,
+#   title = "Forest Plot - Subgroup Analysis"
+# )
+```
+
+**Figura 2:** Forest plot - Análises de subgrupos
+
+[Gráfico será inserido quando os dados estiverem disponíveis]
+
+## Análise de Segurança
+
+### Eventos Adversos
+
+```{r safety-analysis, eval=FALSE}
+# Análise de segurança será realizada quando os dados estiverem disponíveis
+# 
+# ae_summary <- study_data %>%
+#   group_by(treatment_group) %>%
+#   summarise(
+#     total_patients = n(),
+#     any_ae = sum(any_adverse_event),
+#     serious_ae = sum(serious_adverse_event),
+#     discontinuation = sum(discontinued_due_ae)
+#   )
+# 
+# print(ae_summary)
+```
+
+**Tabela 3:** Resumo de eventos adversos
+
+[Tabela será inserida quando os dados estiverem disponíveis]
+
+### Eventos Adversos por Sistema Orgânico
+
+```{r ae-by-system, eval=FALSE}
+# Tabela de eventos adversos por sistema orgânico
+# [Código será inserido quando os dados estiverem disponíveis]
+```
+
+**Tabela 4:** Eventos adversos por sistema orgânico (MedDRA)
+
+[Tabela será inserida quando os dados estiverem disponíveis]
+
+# Discussão {#discussion}
+
+## Interpretação dos Resultados
+
+[Discussão dos resultados principais no contexto da literatura existente]
+
+## Limitações do Estudo
+
+[Discussão das limitações metodológicas e interpretativas]
+
+## Implicações Clínicas
+
+[Discussão sobre as implicações para a prática clínica]
+
+# Conclusões {#conclusions}
+
+[Conclusões finais baseadas nos resultados do estudo]
+
+# Referências {#references}
+
+[Lista de referências bibliográficas]
+
+# Apêndices {#appendices}
+
+## Apêndice A: Protocolo do Estudo
+
+[Resumo do protocolo ou referência ao protocolo completo]
+
+## Apêndice B: Plano de Análise Estatística
+
+[Referência ao SAP (Statistical Analysis Plan)]
+
+## Apêndice C: Listagens de Dados
+
+[Listagens detalhadas conforme necessário]
+
+---
+
+**Informações do Documento:**
+
+- **Título do Estudo:** `r params$study_title`
+- **Número do Protocolo:** `r params$study_number`
+- **Patrocinador:** `r params$sponsor`
+- **Investigador Principal:** `r params$principal_investigator`
+- **Data de Geração:** `r Sys.Date()`
+- **Versão:** 1.0
+
+*Este documento foi gerado automaticamente usando R Markdown e deve ser revisado por um bioestatístico qualificado antes da finalização.*
