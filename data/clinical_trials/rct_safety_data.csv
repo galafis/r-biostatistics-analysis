@@ -1,0 +1,21 @@
+subject_id,treatment,event_id,ae_term,severity,relationship,action_taken,outcome,onset_date,resolution_date
+001,Placebo,AE001,Headache,Mild,Not Related,None,Resolved,2025-01-15,2025-01-16
+002,Active,AE002,Nausea,Moderate,Possibly Related,Symptomatic treatment,Resolved,2025-01-16,2025-01-18
+003,Placebo,AE003,Dizziness,Mild,Not Related,None,Resolved,2025-01-17,2025-01-17
+004,Active,AE004,Fatigue,Mild,Possibly Related,None,Resolved,2025-01-18,2025-01-20
+005,Active,AE005,Nausea,Severe,Probably Related,Drug discontinued,Resolved,2025-01-19,2025-01-22
+006,Placebo,AE006,Insomnia,Mild,Not Related,None,Ongoing,2025-01-20,NA
+007,Active,AE007,Dry mouth,Mild,Possibly Related,None,Resolved,2025-01-21,2025-01-23
+008,Placebo,AE008,Common cold,Moderate,Not Related,Symptomatic treatment,Resolved,2025-01-22,2025-01-25
+009,Active,AE009,Constipation,Moderate,Probably Related,Laxatives,Resolved,2025-01-23,2025-01-26
+010,Active,AE010,Rash,Moderate,Probably Related,Topical treatment,Resolved,2025-01-24,2025-01-27
+011,Placebo,AE011,Back pain,Mild,Not Related,Analgesics,Resolved,2025-01-25,2025-01-28
+012,Active,AE012,Diarrhea,Mild,Possibly Related,None,Resolved,2025-01-26,2025-01-27
+013,Placebo,AE013,Anxiety,Moderate,Not Related,Counseling,Resolved,2025-01-27,2025-02-01
+014,Active,AE014,Palpitations,Mild,Possibly Related,Monitoring,Resolved,2025-01-28,2025-01-30
+015,Placebo,AE015,Muscle cramps,Mild,Not Related,Stretching,Resolved,2025-01-29,2025-01-30
+016,Active,AE016,Blurred vision,Moderate,Probably Related,Drug dose reduction,Resolved,2025-01-30,2025-02-02
+017,Active,AE017,Loss of appetite,Mild,Possibly Related,Nutritional counseling,Resolved,2025-01-31,2025-02-03
+018,Placebo,AE018,Joint pain,Moderate,Not Related,Analgesics,Resolved,2025-02-01,2025-02-04
+019,Active,AE019,Sleep disturbance,Mild,Possibly Related,Sleep hygiene,Resolved,2025-02-02,2025-02-05
+020,Active,AE020,Tremor,Moderate,Probably Related,Drug dose reduction,Resolved,2025-02-03,2025-02-06
