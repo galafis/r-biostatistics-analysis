@@ -1,0 +1,110 @@
+---
+title: "Relatório Final (Final Clinical Report)"
+author: "Biostatistician"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    latex_engine: pdflatex
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+params:
+  study_title: "Phase III Randomized Clinical Trial"
+  study_number: "RCT-2025-001"
+  sponsor: "Clinical Research Organization"
+  data_lock: !r Sys.Date()
+  primary_endpoint: "primary_outcome"
+  treatment_var: "treatment_group"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(survival)
+library(survminer)
+format_table <- function(df, caption = "", digits=3){
+  df %>% kable(format="latex", booktabs=TRUE, caption=caption, digits=digits) %>%
+    kable_styling(latex_options=c("striped","hold_position","scale_down"), font_size=10)
+}
+```
+
+# Sumário Executivo {#executive-summary}
+
+- Lock de dados: `r params$data_lock`
+- Desfecho primário: `r params$primary_endpoint`
+- Conclusão principal: [Adicionar conclusão de eficácia/segurança]
+
+# Introdução {#introduction}
+
+[Contexto clínico, racional e objetivos do estudo]
+
+# Métodos {#methods}
+
+[Desenho do estudo, populações de análise, endpoints, métodos estatísticos]
+
+# Resultados {#results}
+
+## Disposição dos Participantes
+
+[Fluxograma CONSORT e números por fase]
+
+## Características Basais
+
+```{r baseline, eval=FALSE}
+# baseline_vars <- c("age","sex","region","baseline_score")
+# table1 <- tableone::CreateTableOne(vars = baseline_vars, strata = params$treatment_var, data = study_data)
+# print(table1, showAllLevels = TRUE)
+```
+
+## Eficácia
+
+```{r efficacy, eval=FALSE}
+# primary_model <- lm(primary_outcome ~ treatment_group + stratification_factors, data = study_data)
+# summary(primary_model)
+# confint(primary_model)
+```
+
+## Sobrevivência (se aplicável)
+
+```{r survival, eval=FALSE}
+# fit <- survfit(Surv(time, event) ~ get(params$treatment_var), data = study_data)
+# survminer::ggsurvplot(fit, pval = TRUE, conf.int = TRUE)
+```
+
+## Segurança
+
+```{r safety, eval=FALSE}
+# ae_summary <- study_data %>%
+#   group_by(get(params$treatment_var)) %>%
+#   summarise(
+#     n = n(),
+#     any_ae = sum(any_adverse_event),
+#     sae = sum(serious_adverse_event),
+#     discontinuation = sum(discontinued_due_ae)
+#   )
+# format_table(ae_summary, caption = "Resumo de segurança")
+```
+
+# Discussão {#discussion}
+
+[Interpretação dos resultados e comparação com literatura]
+
+# Conclusões {#conclusions}
+
+[Conclusões finais e implicações clínicas]
+
+# Referências {#references}
+
+[Lista de referências]
+
+# Apêndices {#appendices}
+
+- Tabelas e listagens completas
+- Análises de sensibilidade adicionais
