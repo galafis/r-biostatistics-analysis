@@ -1,0 +1,82 @@
+---
+title: "Análise Interina (Interim Analysis)"
+author: "Biostatistician"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: pdflatex
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+params:
+  study_title: "Phase III Randomized Clinical Trial"
+  study_number: "RCT-2025-001"
+  interim_cutoff: !r Sys.Date()
+  treatment_var: "treatment_group"
+  primary_endpoint: "primary_outcome"
+  spending_function: "O'Brien-Fleming"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+library(ggplot2)
+library(kableExtra)
+```
+
+# Sumário Executivo {#executive-summary}
+
+Esta análise interina foi conduzida em `r params$interim_cutoff` conforme o plano de monitoramento pré-especificado e seguindo práticas ICH E9 e diretrizes de grupos de monitoramento de dados (DMC/DSMB).
+
+# Objetivos {#objectives}
+
+- Avaliar eficácia/superioridade/não-inferioridade com limites ajustados por gastos de alfa.
+- Avaliar segurança e eventos adversos graves (SAE) acumulados.
+
+# Métodos {#methods}
+
+## Gasto de Alfa e Limiares de Parada
+
+- Função de gasto: `r params$spending_function`.
+- Limiares para eficácia/futilidade definidos por desenho sequencial (ex.: gsDesign/rpact).
+
+## Populações e Endpoints
+
+- Populações: ITT e Segurança.
+- Endpoint primário: `r params$primary_endpoint`.
+
+# Resultados {#results}
+
+## Eficácia
+
+```{r efficacy, eval=FALSE}
+# Placeholder para estatística Z, p-valor interino e comparação com limiar
+# z_stat &lt;- ...
+# p_val &lt;- ...
+# boundary &lt;- ...
+# decision &lt;- ifelse(z_stat &gt; boundary, "Parar por eficácia", "Continuar")
+```
+
+## Segurança
+
+```{r safety, eval=FALSE}
+# Resumo de segurança acumulado por grupo de tratamento
+# safety_summary &lt;- study_data |>
+#   dplyr::group_by(get(params$treatment_var)) |>
+#   dplyr::summarise(
+#     n = dplyr::n(),
+#     any_ae = sum(any_adverse_event),
+#     sae = sum(serious_adverse_event)
+#   )
+```
+
+# Discussão e Recomendações {#discussion}
+
+- Interpretação dos resultados interinos com controle estrito do erro tipo I.
+- Recomendações ao DMC/DSMB: [parar/continuar/modificar].
+
+# Apêndices {#appendices}
+
+- Detalhes do cálculo de fronteiras interinas e simulações (quando aplicável).
