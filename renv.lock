@@ -1,0 +1,201 @@
+{
+  "R": {
+    "Version": "4.3.2",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cran.rstudio.com"
+      },
+      {
+        "Name": "BioCsoft",
+        "URL": "https://bioconductor.org/packages/3.18/bioc"
+      },
+      {
+        "Name": "BioCann",
+        "URL": "https://bioconductor.org/packages/3.18/data/annotation"
+      },
+      {
+        "Name": "BioCexp",
+        "URL": "https://bioconductor.org/packages/3.18/data/experiment"
+      }
+    ]
+  },
+  "Packages": {
+    "survival": {
+      "Package": "survival",
+      "Version": "3.5-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1234567890abcdef",
+      "Requirements": ["R"]
+    },
+    "survminer": {
+      "Package": "survminer",
+      "Version": "0.4.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2345678901bcdefg",
+      "Requirements": ["survival", "ggplot2", "ggpubr"]
+    },
+    "flexsurv": {
+      "Package": "flexsurv",
+      "Version": "2.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3456789012cdefgh",
+      "Requirements": ["survival", "deSolve"]
+    },
+    "meta": {
+      "Package": "meta",
+      "Version": "6.5-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "456789013defghi",
+      "Requirements": ["R", "metafor"]
+    },
+    "metafor": {
+      "Package": "metafor",
+      "Version": "4.4-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "56789014efghij",
+      "Requirements": ["Matrix", "nlme"]
+    },
+    "netmeta": {
+      "Package": "netmeta",
+      "Version": "2.8-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6789015fghijk",
+      "Requirements": ["meta", "magic", "MASS"]
+    },
+    "tableone": {
+      "Package": "tableone",
+      "Version": "0.13.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "789016ghijkl",
+      "Requirements": ["R", "survey"]
+    },
+    "epiR": {
+      "Package": "epiR",
+      "Version": "2.0.66",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "89017hijklm",
+      "Requirements": ["R", "BiasedUrn"]
+    },
+    "epitools": {
+      "Package": "epitools",
+      "Version": "0.5-10.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9018ijklmn",
+      "Requirements": ["R"]
+    },
+    "MatchIt": {
+      "Package": "MatchIt",
+      "Version": "4.5.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "019jklmno",
+      "Requirements": ["R", "backports"]
+    },
+    "ggplot2": {
+      "Package": "ggplot2",
+      "Version": "3.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "19klmnop",
+      "Requirements": ["R", "gtable", "scales"]
+    },
+    "lme4": {
+      "Package": "lme4",
+      "Version": "1.1-35.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9lmnopq",
+      "Requirements": ["Matrix", "Rcpp", "nlme"]
+    },
+    "lmerTest": {
+      "Package": "lmerTest",
+      "Version": "3.1-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "mnopqr",
+      "Requirements": ["lme4", "numDeriv"]
+    },
+    "nlme": {
+      "Package": "nlme",
+      "Version": "3.1-164",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "nopqrs",
+      "Requirements": ["R", "lattice"]
+    },
+    "geepack": {
+      "Package": "geepack",
+      "Version": "1.3.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "opqrst",
+      "Requirements": ["R", "MASS"]
+    },
+    "PowerTOST": {
+      "Package": "PowerTOST",
+      "Version": "1.5-4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "pqrstu",
+      "Requirements": ["R", "mvtnorm"]
+    },
+    "pROC": {
+      "Package": "pROC",
+      "Version": "1.18.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "qrstuv",
+      "Requirements": ["R", "Rcpp"]
+    },
+    "forestplot": {
+      "Package": "forestplot",
+      "Version": "3.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "rstuvw",
+      "Requirements": ["checkmate", "fpCompare"]
+    },
+    "devtools": {
+      "Package": "devtools",
+      "Version": "2.4.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "stuvwx",
+      "Requirements": ["usethis", "roxygen2"]
+    },
+    "RColorBrewer": {
+      "Package": "RColorBrewer",
+      "Version": "1.1-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "tuvwxy",
+      "Requirements": ["R"]
+    },
+    "gt": {
+      "Package": "gt",
+      "Version": "0.10.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "uvwxyz",
+      "Requirements": ["R", "dplyr", "htmltools"]
+    },
+    "splines": {
+      "Package": "splines",
+      "Version": "4.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "vwxyza",
+      "Requirements": ["R"]
+    }
+  }
+}
