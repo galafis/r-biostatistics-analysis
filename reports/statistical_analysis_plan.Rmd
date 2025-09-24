@@ -1,0 +1,161 @@
+---
+title: "Plano de Análise Estatística (Statistical Analysis Plan)"
+author: "Biostatistician"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    latex_engine: pdflatex
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+params:
+  study_title: "Phase III Randomized Clinical Trial"
+  study_number: "RCT-2025-001"
+  sponsor: "Clinical Research Organization"
+  primary_endpoint: "primary_outcome"
+  key_secondary_endpoints: ["secondary_outcome1", "secondary_outcome2"]
+  treatment_var: "treatment_group"
+  stratification_factors: ["site", "age_group"]
+  analysis_populations: ["ITT", "PP", "Safety"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(ggplot2)
+format_table <- function(df, caption="", digits=3){
+  df %>% kable(format="latex", booktabs=TRUE, caption=caption, digits=digits) %>%
+    kable_styling(latex_options=c("striped","hold_position","scale_down"), font_size=10)
+}
+```
+
+# Sumário Executivo {#executive-summary}
+
+Este Plano de Análise Estatística (SAP) descreve os métodos estatísticos pré-especificados para analisar os dados do estudo `r params$study_title` (Protocolo: `r params$study_number`). O SAP assegura transparência, reprodutibilidade e conformidade com as diretrizes ICH E9.
+
+# Objetivos e Endpoints {#objectives}
+
+## Objetivo Primário
+- Avaliar o efeito do tratamento no desfecho primário: `r params$primary_endpoint`.
+
+## Objetivos Secundários
+- Avaliar os efeitos nos desfechos secundários: `r paste(params$key_secondary_endpoints, collapse=", ")`.
+
+# Populações de Análise {#populations}
+
+- ITT: Todos os participantes randomizados.
+- PP: Participantes que aderiram ao protocolo.
+- Segurança: Todos os participantes que receberam ≥1 dose do tratamento.
+
+# Definições de Variáveis {#variables}
+
+- Variável de tratamento: `r params$treatment_var`
+- Fatores de estratificação: `r paste(params$stratification_factors, collapse=", ")`
+- Covariáveis chave: [definir]
+
+# Regras de Derivação e Limpeza de Dados {#data-handling}
+
+- Janela de visita, regras de imputação de datas, padronização de medidas.
+- Derivações de endpoints compostos e escalas.
+
+# Randomização e Mascaramento {#randomization}
+
+- Esquema de randomização 1:1 estratificada.
+- Procedimentos de alocação e ocultação.
+
+# Métodos Estatísticos {#methods}
+
+## Desfecho Primário
+
+- Modelo/Teste: [ANCOVA/GLM/Regressão logística], com efeito fixo de tratamento e ajuste por estratos/covariáveis conforme aplicável.
+- Nível de significância: α = 0.05 (bicaudal, salvo especificação).
+- Estimandos: diferença de médias/OR/HR e IC95%.
+
+## Desfechos Secundários
+
+- Métodos apropriados por tipo de variável (contínua, binária, tempo-para-evento).
+- Controle de multiplicidade: [Holm/Hochberg/Hierárquico/Bonferroni].
+
+## Tempo-para-Evento
+
+- Kaplan-Meier, teste log-rank, modelo de Cox com verificação da proporcionalidade (Schoenfeld).
+
+## Dados Longitudinais/Repetidos
+
+- Modelos lineares mistos (LMM) ou GEE conforme estrutura de correlação.
+
+## Subgrupos e Sensibilidade
+
+- Análises em subgrupos pré-especificados (ex.: idade, sexo, região).
+- Sensibilidade para suposições de dados faltantes e modelagem alternativa.
+
+# Estratégia para Dados Faltantes {#missing-data}
+
+- Mecanismo previsto: MCAR/MAR/MNAR.
+- Métodos: MMI (múltipla imputação), imputação por modelo, análise de sensibilidade (delta-adjusted, tipping point).
+
+# Ajuste por Multiplicidade {#multiplicity}
+
+- Família de hipóteses: Primária e secundária.
+- Procedimento de controle do FWER/FDR.
+
+# Intercorrências e Estimandos {#estimands}
+
+- Definição de estimando conforme ICH E9(R1): Tratamento, População, Variável, Estratégia para intercurrences, Resumo.
+
+# Tamanho de Amostra e Poder {#sample-size}
+
+- Premissas: efeito esperado, desvio padrão/taxa de evento, correlação intra-sujeito.
+- Fórmulas e/ou referência a cálculos com simulação.
+
+# Planos de Tabelas, Listagens e Figuras (TLFs) {#tlf}
+
+## Tabelas Principais
+
+- Tabela de características basais por tratamento.
+- Tabela de eficácia primária (estimativa, IC95%, p-valor).
+- Tabelas de eventos adversos (TEAE, SAE, descontinuação por AE).
+
+## Figuras
+
+- Curvas Kaplan-Meier, Forest plots de subgrupos, gráficos de efeitos.
+
+## Listagens
+
+- Listagens individuais conforme necessidade regulatória.
+
+```{r tlf-templates, eval=FALSE}
+# Exemplo: tabela de baseline (placeholder)
+# baseline_vars <- c("age","sex","region","baseline_score")
+# table1 <- tableone::CreateTableOne(vars=baseline_vars, strata=params$treatment_var, data=study_data)
+# print(table1, showAllLevels=TRUE)
+
+# Exemplo: curva KM (placeholder)
+# fit <- survival::survfit(Surv(time, event) ~ get(params$treatment_var), data=study_data)
+# survminer::ggsurvplot(fit, pval=TRUE, conf.int=TRUE)
+```
+
+# Controle de Qualidade e Validação {#quality}
+
+- Double programming, revisão por pares, reprodutibilidade.
+- Registro de versões e trilha de auditoria.
+
+# Software e Versões {#software}
+
+- R versão: `r R.version.string`.
+- Pacotes-chave e versões fixadas via renv.
+
+# Cronograma e Entregáveis {#deliverables}
+
+- Datas-chave para análise interina/final e submissões.
+
+---
+
+Este documento é parte integrante do dossiê estatístico e deve ser aprovado antes do lock de banco de dados.
