@@ -2,10 +2,13 @@
 
 <div align="center">
 
+![Advanced Biostatistical Analysis Hero Image](./hero_image.png)
+
 ![R](https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white)
 ![Biostatistics](https://img.shields.io/badge/Biostatistics-Medical%20Research-red?style=for-the-badge)
 ![Clinical](https://img.shields.io/badge/Clinical-Trials-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
+![License](https://img.shields.io/badge/badge/License-MIT-green.svg?style=for-the-badge)
+
 
 **Plataforma completa para análises bioestatísticas e pesquisa médica**
 
