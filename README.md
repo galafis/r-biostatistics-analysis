@@ -29,6 +29,22 @@ Plataforma abrangente de **análises bioestatísticas** desenvolvida em R, espec
 - 📈 **Biometria**: Análise de dados biomédicos complexos
 - 📋 **Relatórios Regulatórios**: Conformidade com ICH, FDA, EMA
 
+### Pipeline de Análise
+
+```mermaid
+flowchart LR
+    A[Dados Clínicos\nEnsaios / Coortes] --> B[Estatísticas Descritivas\ntableone / Hmisc]
+    B --> C[Testes Inferenciais\nt-test / ANOVA / qui-quadrado]
+    C --> D[Análise de Sobrevivência\nKaplan-Meier / Cox]
+    D --> E[Relatório de Resultados\nRMarkdown / CSR]
+
+    subgraph Métodos Estatísticos
+        B
+        C
+        D
+    end
+```
+
 ### 🎯 Objetivos da Plataforma
 
 - **Facilitar análises** estatísticas em pesquisa médica
@@ -494,6 +510,22 @@ Comprehensive **biostatistical analysis** platform developed in R, specialized i
 - 🧬 **Epidemiology**: Observational studies, meta-analyses
 - 📈 **Biometrics**: Complex biomedical data analysis
 - 📋 **Regulatory Reports**: ICH, FDA, EMA compliance
+
+### Analysis Pipeline
+
+```mermaid
+flowchart LR
+    A[Clinical Data\nTrials / Cohorts] --> B[Descriptive Stats\ntableone / Hmisc]
+    B --> C[Inferential Tests\nt-test / ANOVA / Chi-square]
+    C --> D[Survival Analysis\nKaplan-Meier / Cox]
+    D --> E[Results Reporting\nRMarkdown / CSR]
+
+    subgraph Statistical Methods
+        B
+        C
+        D
+    end
+```
 
 ### 🎯 Platform Objectives
 
