@@ -8,6 +8,7 @@
 ![Biostatistics](https://img.shields.io/badge/Biostatistics-Medical%20Research-red?style=for-the-badge)
 ![Clinical](https://img.shields.io/badge/Clinical-Trials-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/badge/License-MIT-green.svg?style=for-the-badge)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](Dockerfile)
 
 **Plataforma completa para análises bioestatísticas e pesquisa médica**
 
